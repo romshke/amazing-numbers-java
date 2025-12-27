@@ -13,3 +13,4 @@ build
 !/Amazing Numbers/task/
 /Amazing Numbers/task/*
 !/Amazing Numbers/task/src
+!/Amazing Numbers/task/test
