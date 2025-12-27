@@ -1,14 +1,13 @@
 package numbers;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class NumberProperties {
-    int number;
+    long number;
 
-    public NumberProperties(int number) {
+    public NumberProperties(long number) {
         this.number = number;
-    }
-
-    public boolean isNatural() {
-        return number > 0;
     }
 
     public boolean isEven() {
@@ -23,16 +22,28 @@ public class NumberProperties {
         return String.valueOf(number).contains("0");
     }
 
+    public boolean isPalindrome() {
+        String numberString = String.valueOf(number);
+
+        for (int i = 0; i < numberString.length() / 2; i++) {
+            if (numberString.charAt(i) != numberString.charAt(numberString.length() - 1 - i)) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     @Override
     public String toString() {
-        if (isNatural()) {
-            return String.format("Properties of %d%n" +
-                    "even:%6b%n" +
-                    "odd:%6b%n" +
-                    "buzz:%6b%n" +
-                    "duck:%6b%n", number, isEven(), !isEven(), isBuzz(), isDuck());
-        } else {
-            return "This number is not natural!";
-        }
+        NumberFormat numberFormat = NumberFormat.getInstance(Locale.US);
+        return String.format("""
+                Properties of %s
+                    even: %b
+                    odd: %b
+                    buzz: %b
+                    duck: %b
+                    palindromic: %b
+                """, numberFormat.format(number), isEven(), !isEven(), isBuzz(), isDuck(), isPalindrome());
     }
 }
